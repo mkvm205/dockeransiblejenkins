@@ -1,11 +1,26 @@
 ---
 - hosts: dev
-  become: True
+  become: true
+  environment:
+    PATH: "/usr/bin:/bin:/usr/sbin:/sbin"  # Add /usr/bin to the PATH
   tasks:
+    - name: Install Docker SDK for Python
+      pip:
+        name: docker
+        state: present
+        executable: /usr/bin/python3.8  # Specify the Python interpreter
+
+    - name: Install docker-py Python module
+      pip:
+        name: docker-py
+        state: present
+        executable: /usr/bin/python3.8  # Specify the Python interpreter
+
     - name: Start the container
       docker_container:
-        name: hariapp
-        image:  "mkvm2050/krish4:1.2"
+        name: krish
+        image: "mkvm2050/krish4:1.2"
         state: started
         published_ports:
-          - 0.0.0.0:8083:8083
+          - "0.0.0.0:8082:8082"
+
