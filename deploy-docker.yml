@@ -6,22 +6,26 @@
       apt:
         name: python3-pip
         state: present
+      when: "'python3-pip' not in ansible_facts.packages"
 
     - name: Install docker
       apt:
         name: docker.io
         state: present
+      when: "'docker.io' not in ansible_facts.packages"
 
     - name: Start docker
       service:
         name: docker
         state: started
         enabled: yes
+      when: "'docker.io' not in ansible_facts.packages"  # Only start Docker if it was installed
 
     - name: Install docker-py python module
       pip:
         name: docker-py
         state: present
+      when: "'docker-py' not in ansible_facts.packages"
 
     - name: Start the container
       docker_container:
