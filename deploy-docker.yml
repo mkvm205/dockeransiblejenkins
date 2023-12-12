@@ -3,6 +3,7 @@
   become: true
   vars:
     ansible_python_interpreter: /usr/bin/python3.8
+    ANSIBLE_CACHE_PLUGIN_CONNECTION: null
   tasks:
     - name: Install Docker SDK for Python
       pip:
