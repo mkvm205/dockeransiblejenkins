@@ -1,0 +1,11 @@
+---
+- hosts: dev
+  become: true
+  tasks:
+    - name: Start the container
+      docker_container:
+        name: krish
+        image: "mkvm2050/krish4:1.2"
+        state: started
+        published_ports:
+          - "0.0.0.0:8082:8082"
